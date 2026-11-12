@@ -70,7 +70,7 @@ function Index() {
   const [open, setOpen] = useState(false);
   const pct = useCount(68);
   return (
-    <div className="min-h-screen bg-background font-sans text-foreground">
+    <div className="mesh-bg min-h-screen bg-background font-sans text-foreground">
       <aside className={`fixed inset-y-0 left-0 z-40 flex w-64 flex-col overflow-hidden bg-sidebar-grad text-navy-foreground transition-transform duration-500 lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="pointer-events-none absolute -left-10 top-1/3 h-48 w-48 rounded-full bg-primary/40 blob" />
         <div className="relative px-6 pt-8 text-center">
@@ -81,7 +81,7 @@ function Index() {
         <nav className="relative mt-8 flex-1 space-y-1 px-3">
           {nav.map((n, i) => (
             <button key={n.label} onClick={() => setActive(i)} style={{ animationDelay: `${i * 60}ms` }}
-              className={`fade-up group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-[15px] font-semibold transition-all duration-300 ${active === i ? "bg-primary-grad shadow-glow" : "hover:translate-x-1 hover:bg-navy-foreground/10"}`}>
+              className={`fade-up group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-[15px] font-semibold transition-all duration-300 ${active === i ? "nav-active bg-primary-grad shadow-glow" : "hover:translate-x-1 hover:bg-navy-foreground/10"}`}>
               {"img" in n && n.img ? <img src={n.img} alt="" width={20} height={20} className="h-6 w-6 object-contain transition-transform group-hover:scale-125" /> : <n.icon className="h-5 w-5 transition-transform group-hover:scale-125" />}{n.label}
             </button>
           ))}
@@ -115,14 +115,14 @@ function Index() {
         </header>
 
         <div className="space-y-6 px-4 pb-10 md:px-8">
-          <section className="fade-up relative overflow-hidden rounded-3xl shadow-card">
+          <section className="fade-up hero-zoom relative overflow-hidden rounded-3xl shadow-card">
             <img src={hero} alt="Universitet talabalari" width={1600} height={640} className="h-[280px] w-full object-cover object-right transition-transform duration-[2s] hover:scale-105" />
             <div className="absolute inset-0 bg-hero-grad" />
             {Array.from({ length: 14 }).map((_, k) => <span key={k} className="sparkle" style={{ left: `${(k * 37) % 60}%`, top: `${(k * 53) % 90}%`, animationDelay: `${k * 0.35}s` }} />)}
             <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-12 text-navy-foreground">
               <h2 className="max-w-3xl text-3xl font-extrabold leading-tight md:text-[2.6rem]">Universitet ta’limini <br /><span className="text-shine">oson va samarali</span> o‘zlashtiring!</h2>
               <p className="mt-3 max-w-md text-lg font-medium opacity-95">Darsliklar, topshiriqlar, kurs ishi, o‘yinlar va til o‘rganish — barchasi bir platformada!</p>
-              <button className="group mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-card px-7 py-3 font-bold text-primary transition-all hover:shadow-glow hover:scale-105">
+              <button className="btn-shine group mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-card px-7 py-3 font-bold text-primary transition-all hover:shadow-glow hover:scale-105">
                 Boshlash <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -131,7 +131,7 @@ function Index() {
           <section className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
             {features.map((f, i) => (
               <div key={f.t} onMouseMove={spot} style={{ animationDelay: `${150 + i * 80}ms` }} className="fade-up lift spot group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:origin-left before:scale-x-0 before:bg-primary-grad before:transition-transform before:duration-500 hover:before:scale-x-100">
-                <div className={`grid h-12 w-12 place-items-center rounded-xl ${f.c} text-primary-foreground transition-transform duration-500 group-hover:rotate-[360deg]`}>{"img" in f && f.img ? <img src={f.img} alt="" width={40} height={40} loading="lazy" className="h-10 w-10 object-contain" /> : <f.icon />}</div>
+                <div className={`grid h-12 w-12 place-items-center rounded-xl ${f.c} text-primary-foreground transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[360deg] icon-pop`}>{"img" in f && f.img ? <img src={f.img} alt="" width={40} height={40} loading="lazy" className="h-10 w-10 object-contain" /> : <f.icon />}</div>
                 <h3 className="mt-3 font-bold">{f.t}</h3>
                 <div className="flex items-end justify-between gap-2"><p className="text-xs text-muted-foreground">{f.d}</p><ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1 group-hover:text-primary" /></div>
               </div>
@@ -146,7 +146,7 @@ function Index() {
               </div>
               <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
                 {list.map((c) => (
-                  <div key={c.t} className="lift group overflow-hidden rounded-2xl border border-border bg-card">
+                  <div key={c.t} className="lift spot group relative overflow-hidden rounded-2xl border border-border bg-card" onMouseMove={spot}>
                     <div className="h-24 overflow-hidden"><img src={c.img} alt={c.t} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" /></div>
                     <div className="p-3">
                       <div className="flex items-center justify-between"><p className="font-bold">{c.t}</p><span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-125"><Play className="h-3 w-3 fill-current" /></span></div>
