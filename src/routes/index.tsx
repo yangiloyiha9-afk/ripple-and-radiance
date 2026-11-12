@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import type React from "react";
 import {
   Home, BookOpen, FileText, ClipboardCheck, Gamepad2, Languages, Leaf, MessageSquare, Info,
   Search, Bell, ChevronDown, ArrowRight, GraduationCap, Play, Layers, BarChart3, Clock, Trophy, Dna, Menu,
@@ -9,6 +10,9 @@ import botanika from "@/assets/botanika.jpg";
 import genetika from "@/assets/genetika.jpg";
 import mikro from "@/assets/mikro.jpg";
 import biokimyo from "@/assets/biokimyo.jpg";
+import support from "@/assets/support.png";
+import university from "@/assets/university.png";
+import avatar from "@/assets/avatar.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,12 +35,12 @@ const nav = [
   { icon: Leaf, label: "Biologiya (Milliy sertifikat)" },
 ];
 const features = [
-  { icon: BookOpen, t: "Darsliklar", d: "Universitet fanlari bo‘yicha darsliklar", c: "bg-primary" },
-  { icon: FileText, t: "Kurs ishi", d: "Kurs ishini yozish bo‘yicha yo‘riqnoma", c: "bg-chart-4" },
-  { icon: ClipboardCheck, t: "Mustaqil ish", d: "Topshiriqlar va namunalar", c: "bg-chart-1" },
-  { icon: Gamepad2, t: "O‘yinlar", d: "Interaktiv bilim o‘yinlari", c: "bg-navy-2" },
-  { icon: Languages, t: "Ingliz tili", d: "0 dan C1 gacha bosqichma-bosqich", c: "bg-destructive" },
-  { icon: Dna, t: "Biologiya", d: "Milliy sertifikatga tayyorgarlik", c: "bg-chart-2" },
+  { icon: BookOpen, t: "Darsliklar", d: "Universitet fanlari bo‘yicha darsliklar", c: "icon-blue" },
+  { icon: FileText, t: "Kurs ishi", d: "Kurs ishini yozish bo‘yicha yo‘riqnoma", c: "icon-violet" },
+  { icon: ClipboardCheck, t: "Mustaqil ish", d: "Topshiriqlar va namunalar", c: "icon-orange" },
+  { icon: Gamepad2, t: "O‘yinlar", d: "Interaktiv bilim o‘yinlari", c: "icon-purple" },
+  { icon: Languages, t: "Ingliz tili", d: "0 dan C1 gacha bosqichma-bosqich", c: "icon-red" },
+  { icon: Dna, t: "Biologiya", d: "Milliy sertifikatga tayyorgarlik", c: "icon-green" },
 ];
 const list = [
   { t: "Botanika", n: 24, p: 72, img: botanika }, { t: "Genetika", n: 18, p: 60, img: genetika },
@@ -51,6 +55,12 @@ function useCount(to: number) {
     raf = requestAnimationFrame(tick); return () => cancelAnimationFrame(raf);
   }, [to]);
   return v;
+}
+
+function spot(e: React.MouseEvent<HTMLElement>) {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
 }
 
 function Index() {
@@ -95,7 +105,7 @@ function Index() {
               <Bell className="h-6 w-6" /><span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 animate-ping rounded-full bg-destructive" /><span className="absolute -right-0.5 -top-0.5 h-2.5 w-2.5 rounded-full bg-destructive" />
             </button>
             <div className="flex items-center gap-3 border-l border-border pl-5">
-              <div className="grid h-11 w-11 place-items-center rounded-full bg-primary-grad font-bold text-primary-foreground">A</div>
+              <img src={avatar} alt="Aslonbek" width={44} height={44} className="h-11 w-11 rounded-full object-cover ring-2 ring-primary ring-offset-2 ring-offset-background transition-transform hover:scale-110" />
               <div className="hidden sm:block"><p className="font-bold leading-tight">Aslonbek</p><p className="text-xs text-muted-foreground">Talaba</p></div>
               <ChevronDown className="h-4 w-4" />
             </div>
@@ -106,6 +116,7 @@ function Index() {
           <section className="fade-up relative overflow-hidden rounded-3xl shadow-card">
             <img src={hero} alt="Universitet talabalari" width={1600} height={640} className="h-[280px] w-full object-cover object-right transition-transform duration-[2s] hover:scale-105" />
             <div className="absolute inset-0 bg-hero-grad" />
+            {Array.from({ length: 14 }).map((_, k) => <span key={k} className="sparkle" style={{ left: `${(k * 37) % 60}%`, top: `${(k * 53) % 90}%`, animationDelay: `${k * 0.35}s` }} />)}
             <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-12 text-navy-foreground">
               <h2 className="max-w-3xl text-3xl font-extrabold leading-tight md:text-[2.6rem]">Universitet ta’limini <br /><span className="text-shine">oson va samarali</span> o‘zlashtiring!</h2>
               <p className="mt-3 max-w-md text-lg font-medium opacity-95">Darsliklar, topshiriqlar, kurs ishi, o‘yinlar va til o‘rganish — barchasi bir platformada!</p>
@@ -117,7 +128,7 @@ function Index() {
 
           <section className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
             {features.map((f, i) => (
-              <div key={f.t} style={{ animationDelay: `${150 + i * 80}ms` }} className="fade-up lift group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:origin-left before:scale-x-0 before:bg-primary-grad before:transition-transform before:duration-500 hover:before:scale-x-100">
+              <div key={f.t} onMouseMove={spot} style={{ animationDelay: `${150 + i * 80}ms` }} className="fade-up lift spot group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:origin-left before:scale-x-0 before:bg-primary-grad before:transition-transform before:duration-500 hover:before:scale-x-100">
                 <div className={`grid h-12 w-12 place-items-center rounded-xl ${f.c} text-primary-foreground transition-transform duration-500 group-hover:rotate-[360deg]`}><f.icon /></div>
                 <h3 className="mt-3 font-bold">{f.t}</h3>
                 <div className="flex items-end justify-between gap-2"><p className="text-xs text-muted-foreground">{f.d}</p><ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1 group-hover:text-primary" /></div>
@@ -168,12 +179,13 @@ function Index() {
           </section>
 
           <section className="grid gap-6 md:grid-cols-2">
-            {[{ i: MessageSquare, t: "Admin ga murojaat", d: "Savol, taklif yoki muammo bo‘yicha admin bilan bog‘laning.", c: "bg-primary/10", ic: "bg-primary" },
-              { i: Info, t: "Biz haqimizda", d: "Platforma maqsadi, imkoniyatlari va jamoa haqida batafsil ma’lumot.", c: "bg-navy-2/10", ic: "bg-navy-2" }].map((b, k) => (
-              <div key={b.t} style={{ animationDelay: `${600 + k * 100}ms` }} className={`fade-up lift group flex cursor-pointer items-center gap-5 rounded-3xl ${b.c} p-6`}>
+            {[{ i: MessageSquare, t: "Admin ga murojaat", d: "Savol, taklif yoki muammo bo‘yicha admin bilan bog‘laning.", c: "bg-primary/10", ic: "icon-blue" },
+              { i: Info, t: "Biz haqimizda", d: "Platforma maqsadi, imkoniyatlari va jamoa haqida batafsil ma’lumot.", c: "bg-navy-2/10", ic: "icon-purple" }].map((b, k) => (
+              <div key={b.t} style={{ animationDelay: `${600 + k * 100}ms` }} onMouseMove={spot} className={`fade-up lift spot group relative flex cursor-pointer items-center gap-5 overflow-hidden rounded-3xl ${b.c} p-6 pr-40`}>
                 <div className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl ${b.ic} text-primary-foreground float`}><b.i className="h-8 w-8" /></div>
                 <div className="flex-1"><h3 className="text-xl font-bold">{b.t}</h3><p className="text-sm text-muted-foreground">{b.d}</p></div>
                 <span className="grid h-10 w-10 place-items-center rounded-full bg-card text-primary shadow-card transition-transform group-hover:translate-x-1"><ArrowRight className="h-5 w-5" /></span>
+                <img src={b.img} alt="" loading="lazy" width={816} height={816} className="pointer-events-none absolute -bottom-3 right-2 h-32 w-32 object-contain transition-transform duration-500 group-hover:-translate-y-2 group-hover:scale-110" />
               </div>
             ))}
           </section>

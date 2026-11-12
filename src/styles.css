@@ -207,3 +207,22 @@
 @utility ring-anim { animation: ring 2s cubic-bezier(.2,.8,.2,1); }
 @keyframes bar { from { width: 0; } }
 @utility bar-anim { animation: bar 1.6s cubic-bezier(.2,.8,.2,1); }
+
+@utility icon-blue { background: linear-gradient(135deg, oklch(0.6 0.2 255), oklch(0.5 0.22 262)); box-shadow: 0 8px 18px -6px oklch(0.55 0.22 258 / .6); }
+@utility icon-violet { background: linear-gradient(135deg, oklch(0.65 0.2 290), oklch(0.52 0.24 285)); box-shadow: 0 8px 18px -6px oklch(0.55 0.24 288 / .6); }
+@utility icon-orange { background: linear-gradient(135deg, oklch(0.8 0.17 70), oklch(0.7 0.19 50)); box-shadow: 0 8px 18px -6px oklch(0.72 0.19 55 / .6); }
+@utility icon-purple { background: linear-gradient(135deg, oklch(0.62 0.22 300), oklch(0.5 0.25 290)); box-shadow: 0 8px 18px -6px oklch(0.55 0.25 295 / .6); }
+@utility icon-red { background: linear-gradient(135deg, oklch(0.55 0.2 260), oklch(0.6 0.22 25)); box-shadow: 0 8px 18px -6px oklch(0.55 0.22 25 / .5); }
+@utility icon-green { background: linear-gradient(135deg, oklch(0.75 0.17 155), oklch(0.6 0.16 160)); box-shadow: 0 8px 18px -6px oklch(0.65 0.17 158 / .6); }
+@utility bg-card-blue { background: linear-gradient(110deg, oklch(0.93 0.04 240), oklch(0.88 0.07 235)); }
+@utility bg-card-violet { background: linear-gradient(110deg, oklch(0.94 0.03 300), oklch(0.89 0.06 295)); }
+@utility spot {
+  &::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .3s;
+    background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), oklch(0.7 0.18 240 / .18), transparent 70%); }
+  &:hover::after { opacity: 1; }
+}
+@utility sparkle {
+  position: absolute; width: 4px; height: 4px; border-radius: 9999px; background: var(--cyan);
+  box-shadow: 0 0 10px 2px var(--cyan); animation: sparkle 3.5s ease-in-out infinite; opacity: 0;
+}
+@keyframes sparkle { 0%,100% { opacity: 0; transform: translateY(0) scale(.4); } 50% { opacity: 1; transform: translateY(-18px) scale(1); } }
