@@ -13,6 +13,8 @@ import biokimyo from "@/assets/biokimyo.jpg";
 import support from "@/assets/support.png";
 import university from "@/assets/university.png";
 import avatar from "@/assets/avatar.jpg";
+import icEn from "@/assets/icon-english.png";
+import icBio from "@/assets/icon-biology.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,16 +33,16 @@ export const Route = createFileRoute("/")({
 const nav = [
   { icon: Home, label: "Bosh sahifa" }, { icon: BookOpen, label: "Darsliklar" },
   { icon: FileText, label: "Kurs ishi" }, { icon: ClipboardCheck, label: "Mustaqil ish" },
-  { icon: Gamepad2, label: "O‘yinlar" }, { icon: Languages, label: "Ingliz tili" },
-  { icon: Leaf, label: "Biologiya (Milliy sertifikat)" },
+  { icon: Gamepad2, label: "O‘yinlar" }, { icon: Languages, label: "Ingliz tili", img: icEn },
+  { icon: Leaf, label: "Biologiya (Milliy sertifikat)", img: icBio },
 ];
 const features = [
   { icon: BookOpen, t: "Darsliklar", d: "Universitet fanlari bo‘yicha darsliklar", c: "icon-blue" },
   { icon: FileText, t: "Kurs ishi", d: "Kurs ishini yozish bo‘yicha yo‘riqnoma", c: "icon-violet" },
   { icon: ClipboardCheck, t: "Mustaqil ish", d: "Topshiriqlar va namunalar", c: "icon-orange" },
   { icon: Gamepad2, t: "O‘yinlar", d: "Interaktiv bilim o‘yinlari", c: "icon-purple" },
-  { icon: Languages, t: "Ingliz tili", d: "0 dan C1 gacha bosqichma-bosqich", c: "icon-red" },
-  { icon: Dna, t: "Biologiya", d: "Milliy sertifikatga tayyorgarlik", c: "icon-green" },
+  { icon: Languages, t: "Ingliz tili", d: "0 dan C1 gacha bosqichma-bosqich", c: "bg-card-blue", img: icEn },
+  { icon: Dna, t: "Biologiya", d: "Milliy sertifikatga tayyorgarlik", c: "bg-card-violet", img: icBio },
 ];
 const list = [
   { t: "Botanika", n: 24, p: 72, img: botanika }, { t: "Genetika", n: 18, p: 60, img: genetika },
@@ -80,7 +82,7 @@ function Index() {
           {nav.map((n, i) => (
             <button key={n.label} onClick={() => setActive(i)} style={{ animationDelay: `${i * 60}ms` }}
               className={`fade-up group flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-[15px] font-semibold transition-all duration-300 ${active === i ? "bg-primary-grad shadow-glow" : "hover:translate-x-1 hover:bg-navy-foreground/10"}`}>
-              <n.icon className="h-5 w-5 transition-transform group-hover:scale-125" />{n.label}
+              {"img" in n && n.img ? <img src={n.img} alt="" width={20} height={20} className="h-6 w-6 object-contain transition-transform group-hover:scale-125" /> : <n.icon className="h-5 w-5 transition-transform group-hover:scale-125" />}{n.label}
             </button>
           ))}
           <div className="my-4 border-t border-navy-foreground/20" />
@@ -129,7 +131,7 @@ function Index() {
           <section className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-6">
             {features.map((f, i) => (
               <div key={f.t} onMouseMove={spot} style={{ animationDelay: `${150 + i * 80}ms` }} className="fade-up lift spot group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:origin-left before:scale-x-0 before:bg-primary-grad before:transition-transform before:duration-500 hover:before:scale-x-100">
-                <div className={`grid h-12 w-12 place-items-center rounded-xl ${f.c} text-primary-foreground transition-transform duration-500 group-hover:rotate-[360deg]`}><f.icon /></div>
+                <div className={`grid h-12 w-12 place-items-center rounded-xl ${f.c} text-primary-foreground transition-transform duration-500 group-hover:rotate-[360deg]`}>{"img" in f && f.img ? <img src={f.img} alt="" width={40} height={40} loading="lazy" className="h-10 w-10 object-contain" /> : <f.icon />}</div>
                 <h3 className="mt-3 font-bold">{f.t}</h3>
                 <div className="flex items-end justify-between gap-2"><p className="text-xs text-muted-foreground">{f.d}</p><ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-1 group-hover:text-primary" /></div>
               </div>
@@ -149,7 +151,7 @@ function Index() {
                     <div className="p-3">
                       <div className="flex items-center justify-between"><p className="font-bold">{c.t}</p><span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-125"><Play className="h-3 w-3 fill-current" /></span></div>
                       <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><Layers className="h-3 w-3" />{c.n} dars</p>
-                      <div className="mt-3 flex items-center gap-2"><div className="h-2 flex-1 overflow-hidden rounded-full bg-muted"><div className="bar-anim h-full rounded-full bg-primary-grad" style={{ width: `${c.p}%` }} /></div><span className="text-xs font-bold">{c.p}%</span></div>
+                      
                     </div>
                   </div>
                 ))}
