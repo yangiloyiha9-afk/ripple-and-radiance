@@ -179,8 +179,8 @@ function Index() {
           </section>
 
           <section className="grid gap-6 md:grid-cols-2">
-            {[{ i: MessageSquare, t: "Admin ga murojaat", d: "Savol, taklif yoki muammo bo‘yicha admin bilan bog‘laning.", c: "bg-primary/10", ic: "icon-blue" },
-              { i: Info, t: "Biz haqimizda", d: "Platforma maqsadi, imkoniyatlari va jamoa haqida batafsil ma’lumot.", c: "bg-navy-2/10", ic: "icon-purple" }].map((b, k) => (
+            {[{ i: MessageSquare, t: "Admin ga murojaat", d: "Savol, taklif yoki muammo bo‘yicha admin bilan bog‘laning.", c: "bg-card-blue", ic: "icon-blue", img: support },
+              { i: Info, t: "Biz haqimizda", d: "Platforma maqsadi, imkoniyatlari va jamoa haqida batafsil ma’lumot.", c: "bg-card-violet", ic: "icon-purple", img: university }].map((b, k) => (
               <div key={b.t} style={{ animationDelay: `${600 + k * 100}ms` }} onMouseMove={spot} className={`fade-up lift spot group relative flex cursor-pointer items-center gap-5 overflow-hidden rounded-3xl ${b.c} p-6 pr-40`}>
                 <div className={`grid h-16 w-16 shrink-0 place-items-center rounded-2xl ${b.ic} text-primary-foreground float`}><b.i className="h-8 w-8" /></div>
                 <div className="flex-1"><h3 className="text-xl font-bold">{b.t}</h3><p className="text-sm text-muted-foreground">{b.d}</p></div>
