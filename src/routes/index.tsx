@@ -116,13 +116,13 @@ function Index() {
 
         <div className="space-y-6 px-4 pb-10 md:px-8">
           <section className="fade-up hero-zoom relative overflow-hidden rounded-3xl shadow-card">
-            <img src={hero} alt="Universitet talabalari" width={1600} height={640} className="h-[280px] w-full object-cover object-right transition-transform duration-[2s] hover:scale-105" />
+            <img src={hero} alt="Universitet talabalari" width={1600} height={640} className="h-[300px] w-full object-cover object-right transition-transform duration-[2s] hover:scale-105" />
             <div className="absolute inset-0 bg-hero-grad" />
             {Array.from({ length: 14 }).map((_, k) => <span key={k} className="sparkle" style={{ left: `${(k * 37) % 60}%`, top: `${(k * 53) % 90}%`, animationDelay: `${k * 0.35}s` }} />)}
             <div className="absolute inset-0 flex flex-col justify-center p-8 md:p-12 text-navy-foreground">
               <h2 className="max-w-3xl text-3xl font-extrabold leading-tight md:text-[2.6rem]">Universitet ta’limini <br /><span className="text-shine">oson va samarali</span> o‘zlashtiring!</h2>
               <p className="mt-3 max-w-md text-lg font-medium opacity-95">Darsliklar, topshiriqlar, kurs ishi, o‘yinlar va til o‘rganish — barchasi bir platformada!</p>
-              <button className="btn-shine group mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-card px-7 py-3 font-bold text-primary transition-all hover:shadow-glow hover:scale-105">
+              <button className="btn-shine group shrink-0 mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-card px-7 py-3 font-bold text-primary transition-all hover:shadow-glow hover:scale-105">
                 Boshlash <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
@@ -149,7 +149,7 @@ function Index() {
                   <div key={c.t} className="lift spot group relative overflow-hidden rounded-2xl border border-border bg-card" onMouseMove={spot}>
                     <div className="h-24 overflow-hidden"><img src={c.img} alt={c.t} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" /></div>
                     <div className="p-3">
-                      <div className="flex items-center justify-between"><p className="font-bold">{c.t}</p><span className="grid h-7 w-7 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-125"><Play className="h-3 w-3 fill-current" /></span></div>
+                      <div className="flex items-center justify-between gap-2"><p className="text-sm font-bold leading-tight">{c.t}</p><span className="absolute right-2 top-2 z-10 grid h-8 w-8 place-items-center shadow-glow rounded-full bg-primary text-primary-foreground transition-transform group-hover:scale-125"><Play className="h-3 w-3 fill-current" /></span></div>
                       <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground"><Layers className="h-3 w-3" />{c.n} dars</p>
                       
                     </div>
